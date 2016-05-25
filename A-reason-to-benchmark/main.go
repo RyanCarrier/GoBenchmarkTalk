@@ -2,8 +2,6 @@ package main
 
 import "fmt"
 
-const part1 = false
-
 //Set has a set of int which can be set and reset
 type Set []int
 
