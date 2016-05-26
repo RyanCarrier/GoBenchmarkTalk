@@ -36,6 +36,9 @@ func solveA(dolla int, items []int) (int, int) {
 	}
 	return -1, -1
 }
+func solveA2(dolla int, items []int) (int, int) {
+	return -1, -1
+}
 
 func solveB(dolla int, items []int) (int, int) {
 	items2 := append([]int{}, items...)

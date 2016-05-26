@@ -14,10 +14,6 @@ func main() {
 	for x := 0; x < 7; x++ {
 		create(10, x)
 	}
-	filename = "2test"
-	for x := 0; x < 10; x++ {
-		create(100000+x*100000, 0)
-	}
 }
 
 func create(coins, n int) {
@@ -28,7 +24,10 @@ func create(coins, n int) {
 	for x := 0; x < n; x++ {
 		coins = coins * base
 	}
-	I, J := rand.Intn(coins-1), rand.Intn(coins-1)
+	I, J := rand.Intn(coins-2), rand.Intn(coins-2)
+	if I == J {
+		J++
+	}
 	infile := filename + strconv.Itoa(coins) + ".in"
 	os.Remove(infile)
 	f, _ := os.OpenFile(infile, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
@@ -39,10 +38,11 @@ func create(coins, n int) {
 	for i := 0; i < coins; i++ {
 		if i == I || i == J {
 			f.WriteString(strconv.Itoa(dolla/2) + " ")
+		} else {
+			f.WriteString(strconv.Itoa(rand.Intn(half)) + " ")
 		}
-		f.WriteString(strconv.Itoa(rand.Intn(half)) + " ")
 	}
 	outfile := filename + strconv.Itoa(coins) + ".out"
 	os.Remove(outfile)
-	ioutil.WriteFile(outfile, []byte(strconv.Itoa(I)+" "+strconv.Itoa(J)), 0666)
+	ioutil.WriteFile(outfile, []byte(strconv.Itoa(I+1)+" "+strconv.Itoa(J+1)), 0666)
 }
