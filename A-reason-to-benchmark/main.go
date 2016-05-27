@@ -2,11 +2,8 @@ package main
 
 import "fmt"
 
-//Set has a set of int which can be set and reset
-type Set []int
-
 func main() {
-	set := Set{1, 2, 3, 4}
+	set := []int{0, 1, 2, 3}
 	fmt.Println("set:\n", set)
 	set = set[0:3]
 	fmt.Println("set after reslice:\n", set)
