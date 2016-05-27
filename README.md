@@ -16,7 +16,7 @@ Use the difference of half the coin as the index of a map (with values of origin
 ie; For aim of 100, 10 would give 10, 75; 25 and 25;25.
 
 This would cause 75 and 25 to collide, finding our sum to 100.
-#### Method A2
+##### Method A2
 
 Same as Generic method A but using an array instead of map.
 ### Method B
@@ -29,7 +29,7 @@ Sort the array of coins, then work from the outside in until you find a match.
 
 The obvious method, for each item, go through every item to see if they add to the aim.
 
-#### Method C2
+##### Method C2
 
 This method is similar, but takes out already compared items, so if the first loop is indexed by i, the second loop will start at i+1.
 
