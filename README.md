@@ -11,12 +11,12 @@ Contains an interesting example of go which made me wonder what the best way to 
 Examples of different ways to solve the [Store Credit, Code Jam](https://code.google.com/codejam/contest/351101/dashboard) problem.
 ### Method A
 
-Store the difference of half the coin in a map;
+Use the difference of half the coin as the index of a map (with values of original position);
 
 ie; For aim of 100, 10 would give 10, 75; 25 and 25;25.
 
 This would cause 75 and 25 to collide, finding our sum to 100.
-#### A2
+#### Method A2
 
 Same as Generic method A but using an array instead of map.
 ### Method B
@@ -29,7 +29,7 @@ Sort the array of coins, then work from the outside in until you find a match.
 
 The obvious method, for each item, go through every item to see if they add to the aim.
 
-#### C2
+#### Method C2
 
 This method is similar, but takes out already compared items, so if the first loop is indexed by i, the second loop will start at i+1.
 
