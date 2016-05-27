@@ -18,12 +18,12 @@ ie; For aim of 100, 10 would give 10, 75; 25 and 25;25.
 This would cause 75 and 25 to collide, finding our sum to 100.
 ##### Method A2
 
-Same as Generic method A but using an array instead of map.
+Same as generic method A but using an array instead of map.
 ### Method B
 
 Sort the array of coins, then work from the outside in until you find a match.
 
-(Note: Due to the CreateCases being designed lazily, this method is ALWAYS worst case scenarioß)
+(Note: Due to the CreateCases being designed lazily, this method is ALWAYS worst case scenario)
 
 ### Method C
 
