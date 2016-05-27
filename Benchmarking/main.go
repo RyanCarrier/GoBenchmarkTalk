@@ -37,6 +37,22 @@ func solveA(dolla int, items []int) (int, int) {
 	return -1, -1
 }
 func solveA2(dolla int, items []int) (int, int) {
+	var index int
+	data := make([]int, (dolla/2)+1)
+	for i, it := range items {
+		if it > dolla/2 {
+			index = dolla - it
+		} else {
+			index = it
+		}
+		if data[index] == 0 {
+			data[index] = i + 1
+		} else {
+			if items[data[index]-1]+items[i] == dolla {
+				return data[index], i + 1
+			}
+		}
+	}
 	return -1, -1
 }
 

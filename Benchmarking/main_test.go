@@ -29,6 +29,8 @@ func benchmark(b *testing.B, which int, n int) {
 			solveB(inputs, inputs2)
 		case 2:
 			solveC(inputs, inputs2)
+		case 3:
+			solveA2(inputs, inputs2)
 		}
 
 	}
@@ -54,6 +56,14 @@ func BenchmarkSolveA10000(b *testing.B)    { benchmark(b, 0, 10000) }
 func BenchmarkSolveA100000(b *testing.B)   { benchmark(b, 0, 100000) }
 func BenchmarkSolveA1000000(b *testing.B)  { benchmark(b, 0, 1000000) }
 func BenchmarkSolveA10000000(b *testing.B) { benchmark(b, 0, 10000000) }
+
+func BenchmarkSolve2A10(b *testing.B)       { benchmark(b, 3, 10) }
+func BenchmarkSolve2A100(b *testing.B)      { benchmark(b, 3, 100) }
+func BenchmarkSolve2A1000(b *testing.B)     { benchmark(b, 3, 1000) }
+func BenchmarkSolve2A10000(b *testing.B)    { benchmark(b, 3, 10000) }
+func BenchmarkSolve2A100000(b *testing.B)   { benchmark(b, 3, 100000) }
+func BenchmarkSolve2A1000000(b *testing.B)  { benchmark(b, 3, 1000000) }
+func BenchmarkSolve2A10000000(b *testing.B) { benchmark(b, 3, 10000000) }
 
 func BenchmarkSolveB10(b *testing.B)       { benchmark(b, 1, 10) }
 func BenchmarkSolveB100(b *testing.B)      { benchmark(b, 1, 100) }
@@ -99,6 +109,8 @@ func test(t *testing.T, which int, n int) {
 		solA, solB = solveB(inputs, inputs2)
 	case 2:
 		solA, solB = solveC(inputs, inputs2)
+	case 3:
+		solA, solB = solveA2(inputs, inputs2)
 	}
 	switch {
 	case solA != a && solB != b:
@@ -117,6 +129,12 @@ func TestSolveA100(t *testing.T)    { test(t, 0, 100) }
 func TestSolveA1000(t *testing.T)   { test(t, 0, 1000) }
 func TestSolveA10000(t *testing.T)  { test(t, 0, 10000) }
 func TestSolveA100000(t *testing.T) { test(t, 0, 100000) }
+
+func TestSolve2A10(t *testing.T)     { test(t, 3, 10) }
+func TestSolve2A100(t *testing.T)    { test(t, 3, 100) }
+func TestSolve2A1000(t *testing.T)   { test(t, 3, 1000) }
+func TestSolve2A10000(t *testing.T)  { test(t, 3, 10000) }
+func TestSolve2A100000(t *testing.T) { test(t, 3, 100000) }
 
 func TestSolveB10(t *testing.T)     { test(t, 1, 10) }
 func TestSolveB100(t *testing.T)    { test(t, 1, 100) }
