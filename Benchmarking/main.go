@@ -103,6 +103,19 @@ func solveC(dolla int, items []int) (int, int) {
 	}
 	return -1, -1
 }
+func solveC2(dolla int, items []int) (int, int) {
+	//fmt.Println(dolla, items)
+	var j int
+	l := len(items)
+	for i, ii := range items {
+		for j = i + 1; j < l; j++ {
+			if ii+items[j] == dolla {
+				return i + 1, j + 1
+			}
+		}
+	}
+	return -1, -1
+}
 
 func get(r io.Reader) (int, []int) {
 	var total int

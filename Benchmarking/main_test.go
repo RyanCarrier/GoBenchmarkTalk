@@ -31,6 +31,8 @@ func benchmark(b *testing.B, which int, n int) {
 			solveC(inputs, inputs2)
 		case 3:
 			solveA2(inputs, inputs2)
+		case 4:
+			solveC2(inputs, inputs2)
 		}
 
 	}
@@ -73,13 +75,23 @@ func BenchmarkSolveB100000(b *testing.B)   { benchmark(b, 1, 100000) }
 func BenchmarkSolveB1000000(b *testing.B)  { benchmark(b, 1, 1000000) }
 func BenchmarkSolveB10000000(b *testing.B) { benchmark(b, 1, 10000000) }
 
-func BenchmarkSolveC10(b *testing.B)       { benchmark(b, 2, 10) }
-func BenchmarkSolveC100(b *testing.B)      { benchmark(b, 2, 100) }
-func BenchmarkSolveC1000(b *testing.B)     { benchmark(b, 2, 1000) }
-func BenchmarkSolveC10000(b *testing.B)    { benchmark(b, 2, 10000) }
-func BenchmarkSolveC100000(b *testing.B)   { benchmark(b, 2, 100000) }
-func BenchmarkSolveC1000000(b *testing.B)  { benchmark(b, 2, 1000000) }
-func BenchmarkSolveC10000000(b *testing.B) { benchmark(b, 2, 10000000) }
+func BenchmarkSolveC10(b *testing.B)     { benchmark(b, 2, 10) }
+func BenchmarkSolveC100(b *testing.B)    { benchmark(b, 2, 100) }
+func BenchmarkSolveC1000(b *testing.B)   { benchmark(b, 2, 1000) }
+func BenchmarkSolveC10000(b *testing.B)  { benchmark(b, 2, 10000) }
+func BenchmarkSolveC100000(b *testing.B) { benchmark(b, 2, 100000) }
+
+// func BenchmarkSolveC1000000(b *testing.B)  { benchmark(b, 2, 1000000) }
+// func BenchmarkSolveC10000000(b *testing.B) { benchmark(b, 2, 10000000) }
+
+func BenchmarkSolve2C10(b *testing.B)     { benchmark(b, 4, 10) }
+func BenchmarkSolve2C100(b *testing.B)    { benchmark(b, 4, 100) }
+func BenchmarkSolve2C1000(b *testing.B)   { benchmark(b, 4, 1000) }
+func BenchmarkSolve2C10000(b *testing.B)  { benchmark(b, 4, 10000) }
+func BenchmarkSolve2C100000(b *testing.B) { benchmark(b, 4, 100000) }
+
+// func BenchmarkSolve2C1000000(b *testing.B)  { benchmark(b, 4, 1000000) }
+// func BenchmarkSolve2C10000000(b *testing.B) { benchmark(b, 4, 10000000) }
 
 /*
 func BenchmarkGet10(b *testing.B)         { benchmarkGet(b, 10) }
@@ -111,6 +123,8 @@ func test(t *testing.T, which int, n int) {
 		solA, solB = solveC(inputs, inputs2)
 	case 3:
 		solA, solB = solveA2(inputs, inputs2)
+	case 4:
+		solA, solB = solveC2(inputs, inputs2)
 	}
 	switch {
 	case solA != a && solB != b:
@@ -147,3 +161,9 @@ func TestSolveC100(t *testing.T)    { test(t, 2, 100) }
 func TestSolveC1000(t *testing.T)   { test(t, 2, 1000) }
 func TestSolveC10000(t *testing.T)  { test(t, 2, 10000) }
 func TestSolveC100000(t *testing.T) { test(t, 2, 100000) }
+
+func TestSolve2C10(t *testing.T)     { test(t, 4, 10) }
+func TestSolve2C100(t *testing.T)    { test(t, 4, 100) }
+func TestSolve2C1000(t *testing.T)   { test(t, 4, 1000) }
+func TestSolve2C10000(t *testing.T)  { test(t, 4, 10000) }
+func TestSolve2C100000(t *testing.T) { test(t, 4, 100000) }

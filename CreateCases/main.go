@@ -12,21 +12,25 @@ var base = 10
 
 func main() {
 	for x := 0; x < 7; x++ {
-		create(10, x)
+		create(10, x, true)
 	}
 }
 
-func create(coins, n int) {
-
+func create(coins, n int, cheat bool) {
 	tests := 1
-	dolla := 1000
+	dolla := 2 * coins
 	half := (dolla - 2) / 2
 	for x := 0; x < n; x++ {
 		coins = coins * base
 	}
-	I, J := rand.Intn(coins-2), rand.Intn(coins-2)
-	if I == J {
-		J++
+	var I, J int
+	if cheat {
+		I, J = coins-2, coins-1
+	} else {
+		I, J = rand.Intn(coins-2), rand.Intn(coins-2)
+		if I == J {
+			J++
+		}
 	}
 	infile := filename + strconv.Itoa(coins) + ".in"
 	os.Remove(infile)
