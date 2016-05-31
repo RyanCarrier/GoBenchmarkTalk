@@ -19,7 +19,8 @@ func main() {
 func create(coins, n int, cheat bool) {
 	tests := 1
 	dolla := 2 * coins
-	half := (dolla - 2) / 2
+	half := ((dolla - 2) / 2)
+	halfOdd := half + 1
 	for x := 0; x < n; x++ {
 		coins = coins * base
 	}
@@ -43,7 +44,11 @@ func create(coins, n int, cheat bool) {
 		if i == I || i == J {
 			f.WriteString(strconv.Itoa(dolla/2) + " ")
 		} else {
-			f.WriteString(strconv.Itoa(rand.Intn(half)) + " ")
+			if i%2 == 0 {
+				f.WriteString(strconv.Itoa(rand.Intn(half/2)*2) + " ")
+			} else {
+				f.WriteString(strconv.Itoa(rand.Intn(half/2)*2+halfOdd) + " ")
+			}
 		}
 	}
 	outfile := filename + strconv.Itoa(coins) + ".out"
