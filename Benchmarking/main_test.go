@@ -14,7 +14,6 @@ var biginput = "bigtest.in"
 var part1disable = true
 
 func benchmark(b *testing.B, which int, n int) {
-
 	filename := "../CreateCases/test" + strconv.Itoa(n) + ".in"
 	r, _ := os.Open(filename)
 	var tests int

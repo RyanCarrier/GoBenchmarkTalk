@@ -103,6 +103,7 @@ func solveC(dolla int, items []int) (int, int) {
 	}
 	return -1, -1
 }
+
 func solveC2(dolla int, items []int) (int, int) {
 	//fmt.Println(dolla, items)
 	var j int

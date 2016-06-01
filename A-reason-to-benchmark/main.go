@@ -9,6 +9,7 @@ func main() {
 	fmt.Println("set after reslice:\n", set)
 	//fmt.Println(set[3])
 	clone := set[0:4]
+	fmt.Println(clone[3])
 	clone2 := set
 	clone3 := clone2[0:4]
 	//fmt.Println("set index 3\n", len(set), cap(set), set[3])
