@@ -12,7 +12,7 @@ var base = 10
 
 func main() {
 	for x := 0; x < 7; x++ {
-		create(10, x, false)
+		create(10, x, true)
 	}
 }
 
