@@ -12,7 +12,7 @@ var base = 10
 
 func main() {
 	for x := 0; x < 7; x++ {
-		create(10, x, true)
+		create(10, x, false)
 	}
 }
 
@@ -20,7 +20,7 @@ func create(coins, n int, cheat bool) {
 	tests := 1
 	dolla := 2 * coins
 	half := ((dolla - 2) / 2)
-	halfOdd := half + 1
+	//halfOdd := half + 3
 	for x := 0; x < n; x++ {
 		coins = coins * base
 	}
@@ -47,7 +47,7 @@ func create(coins, n int, cheat bool) {
 			if i%2 == 0 {
 				f.WriteString(strconv.Itoa(rand.Intn(half/2)*2) + " ")
 			} else {
-				f.WriteString(strconv.Itoa(rand.Intn(half/2)*2+halfOdd) + " ")
+				f.WriteString(strconv.Itoa((rand.Intn(dolla/4)*2)+(2*(dolla/4))+1) + " ")
 			}
 		}
 	}

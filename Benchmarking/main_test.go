@@ -21,20 +21,27 @@ func benchmark(b *testing.B, which int, n int) {
 	fmt.Fscan(r, &tests)
 	inputs, inputs2 := get(r)
 	b.ResetTimer()
-	for n := 0; n < b.N; n++ {
-		switch which {
-		case 0:
+	switch which {
+	case 0:
+		for n := 0; n < b.N; n++ {
 			solveA(inputs, inputs2)
-		case 1:
+		}
+	case 1:
+		for n := 0; n < b.N; n++ {
 			solveB(inputs, inputs2)
-		case 2:
+		}
+	case 2:
+		for n := 0; n < b.N; n++ {
 			solveC(inputs, inputs2)
-		case 3:
+		}
+	case 3:
+		for n := 0; n < b.N; n++ {
 			solveA2(inputs, inputs2)
-		case 4:
+		}
+	case 4:
+		for n := 0; n < b.N; n++ {
 			solveC2(inputs, inputs2)
 		}
-
 	}
 }
 
