@@ -9,37 +9,27 @@ import (
 	"testing"
 )
 
-var testinput = "test.in"
-var biginput = "bigtest.in"
-var part1disable = true
-
 func benchmark(b *testing.B, which int, n int) {
+	//Get the input file
 	filename := "../CreateCases/test" + strconv.Itoa(n) + ".in"
 	r, _ := os.Open(filename)
 	var tests int
 	fmt.Fscan(r, &tests)
 	inputs, inputs2 := get(r)
 	b.ResetTimer()
-	switch which {
-	case 0:
-		for n := 0; n < b.N; n++ {
+	for n := 0; n < b.N; n++ {
+		switch which {
+		case 0:
 			solveA(inputs, inputs2)
-		}
-	case 1:
-		for n := 0; n < b.N; n++ {
+		case 1:
 			solveB(inputs, inputs2)
-		}
-	case 2:
-		for n := 0; n < b.N; n++ {
+		case 2:
 			solveC(inputs, inputs2)
-		}
-	case 3:
-		for n := 0; n < b.N; n++ {
+		case 3:
 			solveA2(inputs, inputs2)
-		}
-	case 4:
-		for n := 0; n < b.N; n++ {
+		case 4:
 			solveC2(inputs, inputs2)
+
 		}
 	}
 }
