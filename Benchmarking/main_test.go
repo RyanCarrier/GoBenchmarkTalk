@@ -14,9 +14,7 @@ func benchmark(b *testing.B, which int, n int) {
 	filename := "../CreateCases/test" + strconv.Itoa(n) + ".in"
 	r, err := os.Open(filename)
 	if err != nil {
-		if err == os.ErrNotExist {
-			b.Fatal("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
-		}
+		b.Skip("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
 	}
 	var tests int
 	//pull the test int out, not used though.
