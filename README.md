@@ -40,3 +40,11 @@ This method is similar, but takes out already compared items, so if the first lo
 Contains golang method to create the [Store Credit, Code Jam](https://code.google.com/codejam/contest/351101/dashboard) cases to be benchmarked against.
 
 A cheat option can be toggled, where the cheat will place the correct coins at the very end of the list, forcing worst case scenario on every solving method.
+
+##Do-it-live
+
+Contains the live programming of 'Benchmarking', methods A and C are switched, but otherwise identical.
+
+##EverythingWillWOrk
+
+Contains the live programming of 'A-reason-to-benchmark', the interesting memory management of slices.
