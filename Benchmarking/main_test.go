@@ -12,12 +12,20 @@ import (
 func benchmark(b *testing.B, which int, n int) {
 	//Get the input file
 	filename := "../CreateCases/test" + strconv.Itoa(n) + ".in"
-	r, _ := os.Open(filename)
+	r, err := os.Open(filename)
+	if err != nil {
+		if err == os.ErrNotExist {
+			b.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
+		}
+	}
 	var tests int
+	//pull the test int out, not used though.
 	fmt.Fscan(r, &tests)
 	inputs, inputs2 := get(r)
+	//Reset the benchmark timer before the loop, now that the input is setup
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
+		//Ignore outputs, we only care about the speed of processing
 		switch which {
 		case 0:
 			solveA(inputs, inputs2)
@@ -101,11 +109,19 @@ func BenchmarkGet1000000(b *testing.B)    { benchmarkGet(b, 1000000) }
 func test(t *testing.T, which int, n int) {
 	filename := "../CreateCases/test" + strconv.Itoa(n) + ".in"
 	filenameout := "../CreateCases/test" + strconv.Itoa(n) + ".out"
-	r, _ := os.Open(filename)
+	r, err := os.Open(filename)
+	if err != nil {
+		if err == os.ErrNotExist {
+			t.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
+		}
+	}
 	var tests int
 	fmt.Fscan(r, &tests)
 	inputs, inputs2 := get(r)
-	body, _ := ioutil.ReadFile(filenameout)
+	body, err := ioutil.ReadFile(filenameout)
+	if err != nil {
+		t.Error("Test case", filenameout, "error.\nPlease run `main.go` from ``../CreateCases`")
+	}
 	parts := strings.Fields(string(body))
 	a, _ := strconv.Atoi(parts[0])
 	b, _ := strconv.Atoi(parts[1])
@@ -124,6 +140,7 @@ func test(t *testing.T, which int, n int) {
 	}
 	switch {
 	case solA != a && solB != b:
+		//check oposites
 		if solA != b && solB != a {
 			t.Error("\nA GOT:", solA, "\nA WANT:", a, "\nB GOT:", solB, "\nB WANT:", b)
 		}
