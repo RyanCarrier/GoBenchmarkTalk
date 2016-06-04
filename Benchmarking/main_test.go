@@ -15,7 +15,7 @@ func benchmark(b *testing.B, which int, n int) {
 	r, err := os.Open(filename)
 	if err != nil {
 		if err == os.ErrNotExist {
-			b.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
+			b.Fatal("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
 		}
 	}
 	var tests int
