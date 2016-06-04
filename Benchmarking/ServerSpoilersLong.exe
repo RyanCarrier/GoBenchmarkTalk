@@ -1,0 +1,41 @@
+PASS
+BenchmarkSolveA10-4      	20000000	      1905 ns/op
+BenchmarkSolveA100-4     	 1000000	     40215 ns/op
+BenchmarkSolveA1000-4    	  100000	    357246 ns/op
+BenchmarkSolveA10000-4   	   10000	   3299154 ns/op
+BenchmarkSolveA100000-4  	    1000	  39531646 ns/op
+BenchmarkSolveA1000000-4 	     100	 466555009 ns/op
+BenchmarkSolveA10000000-4	       5	5591690330 ns/op
+ok  	github.com/RyanCarrier/GoBenchmarkTalk/Benchmarking	495.316s
+PASS
+BenchmarkSolve2A10-4      	100000000	       350 ns/op
+BenchmarkSolve2A100-4     	20000000	      2026 ns/op
+BenchmarkSolve2A1000-4    	 2000000	     18199 ns/op
+BenchmarkSolve2A10000-4   	  200000	    185431 ns/op
+BenchmarkSolve2A100000-4  	   10000	   3094690 ns/op
+BenchmarkSolve2A1000000-4 	    1000	  58526056 ns/op
+BenchmarkSolve2A10000000-4	      50	1071551919 ns/op
+ok  	github.com/RyanCarrier/GoBenchmarkTalk/Benchmarking	547.635s
+PASS
+BenchmarkSolveB10-4      	30000000	       942 ns/op
+BenchmarkSolveB100-4     	 3000000	     12064 ns/op
+BenchmarkSolveB1000-4    	  200000	    143341 ns/op
+BenchmarkSolveB10000-4   	   20000	   1772082 ns/op
+BenchmarkSolveB100000-4  	    2000	  21906186 ns/op
+BenchmarkSolveB1000000-4 	     100	 255838925 ns/op
+BenchmarkSolveB10000000-4	      10	3214466737 ns/op
+ok  	github.com/RyanCarrier/GoBenchmarkTalk/Benchmarking	579.570s
+PASS
+BenchmarkSolveC10-4    	200000000	       350 ns/op
+BenchmarkSolveC100-4   	 2000000	     29865 ns/op
+BenchmarkSolveC1000-4  	   20000	   2915539 ns/op
+BenchmarkSolveC10000-4 	     200	 294230767 ns/op
+BenchmarkSolveC100000-4	       2	32910868156 ns/op
+ok  	github.com/RyanCarrier/GoBenchmarkTalk/Benchmarking	518.208s
+PASS
+BenchmarkSolve2C10-4    	500000000	       156 ns/op
+BenchmarkSolve2C100-4   	 5000000	      9791 ns/op
+BenchmarkSolve2C1000-4  	   50000	    972532 ns/op
+BenchmarkSolve2C10000-4 	     500	  98223249 ns/op
+BenchmarkSolve2C100000-4	       5	11220254849 ns/op
+ok  	github.com/RyanCarrier/GoBenchmarkTalk/Benchmarking	422.156s
