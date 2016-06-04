@@ -9,6 +9,8 @@ Contains an interesting example of go which made me wonder what the best way to 
 ## Benchmarking
 
 Examples of different ways to solve the [Store Credit, Code Jam](https://code.google.com/codejam/contest/351101/dashboard) problem.
+
+**NOTE: Be sure to `go run main.go` from CreateCases before trying to benchmark.**
 ### Method A
 
 Use the difference of half the coin as the index of a map (with values of original position);
