@@ -109,9 +109,7 @@ func test(t *testing.T, which int, n int) {
 	filenameout := "../CreateCases/test" + strconv.Itoa(n) + ".out"
 	r, err := os.Open(filename)
 	if err != nil {
-		if err == os.ErrNotExist {
-			t.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
-		}
+		t.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
 	}
 	var tests int
 	fmt.Fscan(r, &tests)
