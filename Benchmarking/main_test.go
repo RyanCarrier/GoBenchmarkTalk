@@ -109,14 +109,14 @@ func test(t *testing.T, which int, n int) {
 	filenameout := "../CreateCases/test" + strconv.Itoa(n) + ".out"
 	r, err := os.Open(filename)
 	if err != nil {
-		t.Error("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
+		t.Fatal("Test case", filename, "not found.\nPlease run `main.go` from ``../CreateCases`")
 	}
 	var tests int
 	fmt.Fscan(r, &tests)
 	inputs, inputs2 := get(r)
 	body, err := ioutil.ReadFile(filenameout)
 	if err != nil {
-		t.Error("Test case", filenameout, "error.\nPlease run `main.go` from ``../CreateCases`")
+		t.Fatal("Test case", filenameout, "error.\nPlease run `main.go` from ``../CreateCases`")
 	}
 	parts := strings.Fields(string(body))
 	a, _ := strconv.Atoi(parts[0])
