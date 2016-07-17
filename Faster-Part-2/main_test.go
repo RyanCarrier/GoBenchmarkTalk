@@ -12,8 +12,15 @@ func bench(b *t.B, x int, sqrtCheck bool) {
 }
 
 func sbench(b *t.B, x, routines int, quitEnabled bool) {
+	if x%routines != 0 {
+		b.Errorf("Can't split %d into %d go routines", x, routines)
+	}
 	for n := 0; n <= b.N; n++ {
-		superTest(x, routines, quitEnabled)
+		a, _, _ := superTest(x, routines, quitEnabled)
+		if a == 0 {
+
+			b.Error("Either goal is unatainable (most likely)")
+		}
 	}
 }
 
@@ -40,8 +47,7 @@ func BenchmarkSuperTest10000Q_CPU1(b *t.B)   { sbench(b, 100000, runtime.NumCPU(
 func BenchmarkSuperTest10000Q_CPU2(b *t.B)   { sbench(b, 100000, runtime.NumCPU()*2, true) }
 func BenchmarkSuperTest10000Q_CPU4(b *t.B)   { sbench(b, 100000, runtime.NumCPU()*4, true) }
 func BenchmarkSuperTest10000Q_CPU8(b *t.B)   { sbench(b, 100000, runtime.NumCPU()*8, true) }
-
-//func BenchmarkSuperTest10000Q_CPU16(b *t.B)  { sbench(b, 100000, runtime.NumCPU()*16, true) }
+func BenchmarkSuperTest10000Q_CPU16(b *t.B)  { sbench(b, 100000, runtime.NumCPU()*16, true) }
 
 /*
 //

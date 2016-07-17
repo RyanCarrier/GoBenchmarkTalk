@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"math"
-	"runtime"
 	"sync"
+
+	gbd "github.com/RyanCarrier/GoBenchDyn"
 )
 
 /*
@@ -20,9 +21,32 @@ Find the product abc.
 */
 
 func main() {
-	fmt.Println(runtime.NumCPU())
-	fmt.Println(plainTest(10000))
-	fmt.Println(superTest(10000, 10, true))
+	f, ivs := benchWrapper(1000, 100000, 0, 64, false)
+	fmt.Println(gbd.RangeN("SuperBench", f, ivs...))
+}
+
+func benchWrapper(xfrom, xto, cpufrom, cputo int, plain bool) (func(...int), []gbd.IntVar) {
+	var x gbd.IntVar
+	switch {
+	case xfrom%10 == 0 && xto%10 == 0:
+		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 10}
+	case xto%5 == 0:
+		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 5}
+	case xto%2 == 0:
+		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 2}
+	}
+	cpu := gbd.IntVar{VarName: "routines", From: cpufrom, To: cputo, Increment: cputo / 16 * max(cpufrom, 1)}
+	ivs := []gbd.IntVar{x, cpu}
+	if plain {
+		return plainTestBenchWrapper, ivs
+	}
+	return superTestBenchWrapper, ivs
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
 
 func test(x int, checkSqrt bool) (int, int, int) {
@@ -61,6 +85,9 @@ func sqrtTest(x int) (int, int, int) {
 	}
 	return 0, 0, 0
 }
+func plainTestBenchWrapper(x ...int) {
+	plainTest(x[0])
+}
 func plainTest(x int) (int, int, int) {
 	for a := 0; a < x/2; a++ {
 		for b := a + 1; b < x/2; b++ {
@@ -84,37 +111,37 @@ func plainTest(x int) (int, int, int) {
 	return 0, 0, 0
 }
 
-func superTest(x, routines int, quitEnabled bool) (int, int, int) {
+func superTestBenchWrapper(x ...int) {
+	_, _, _ = superTest(x[0], x[1])
+}
+
+func superTest(x, routines int) (int, int, int) {
+	if routines == 0 {
+		routines = 1
+	}
 	wg := sync.WaitGroup{}
 	resultChan := make(chan int, 3)
 	wg.Add(routines)
-	if x%routines != 0 {
-		//fmt.Print("Fk u")
-		return 0, 0, 0
-	}
+	/*if x%routines != 0 {
+		wg.Add(1)
+	}*/
 	quit := false
 	z := 1
 	for i := 0; i < routines; i++ {
 		if i == routines-1 {
-			z = 0
+			go subtest(x, i*(x/routines), x, &wg, &quit, resultChan)
+		} else {
+			go subtest(x, i*(x/routines), (i+1)*(x/routines)-z, &wg, &quit, resultChan)
 		}
-		go subtest(x, i*(x/routines), (i+1)*(x/routines)-z, &wg, quitEnabled, &quit, resultChan)
 	}
 	wg.Wait()
 	return <-resultChan, <-resultChan, <-resultChan
 }
 
-func subtest(x, amin, amax int, wg *sync.WaitGroup, quitEnabled bool, quit *bool, result chan int) {
+func subtest(x, amin, amax int, wg *sync.WaitGroup, quit *bool, result chan int) {
 	//fmt.Println(x, amin, amax, *quit)
-	for a := amin; a <= amax; a++ {
-		if quitEnabled && *quit {
-			//fmt.Println("QuitingEarly")
-			break
-		}
-		for b := a + 1; b < x/2; b++ {
-			if quitEnabled && *quit {
-				break
-			}
+	for a := amin; a <= amax && !*quit; a++ {
+		for b := a + 1; b < x/2 && !*quit; b++ {
 			//fmt.Println(amin, amax, a, b, *quit)
 			m := math.Sqrt(float64(a*a + b*b))
 			im := int(m)
