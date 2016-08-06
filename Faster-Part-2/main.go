@@ -21,27 +21,25 @@ Find the product abc.
 */
 
 func main() {
-	f, ivs := benchWrapper(1000, 100000, 0, 64, false)
+	f, ivs := benchWrapper(1000, 1000000, 10, 1, 64, 0, 2, false)
 	fmt.Println(gbd.RangeN("SuperBench", f, ivs...))
 }
 
-func benchWrapper(xfrom, xto, cpufrom, cputo int, plain bool) (func(...int), []gbd.IntVar) {
-	var x gbd.IntVar
-	switch {
-	case xfrom%10 == 0 && xto%10 == 0:
-		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 10}
-	case xto%5 == 0:
-		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 5}
-	case xto%2 == 0:
-		x = gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: 2}
+func benchWrapper(xfrom, xto, xmultiple, cpufrom, cputo, cpuinc, cpumult int, plain bool) (func(...int), []gbd.IntVar) {
+	var cpu gbd.IntVar
+	x := gbd.IntVar{VarName: "x", From: xfrom, To: xto, Multiple: xmultiple}
+	if cpumult > 0 {
+		cpu = gbd.IntVar{VarName: "routines", From: cpufrom, To: cputo, Multiple: cpumult}
+	} else {
+		cpu = gbd.IntVar{VarName: "routines", From: cpufrom, To: cputo, Increment: cpuinc}
 	}
-	cpu := gbd.IntVar{VarName: "routines", From: cpufrom, To: cputo, Increment: cputo / 16 * max(cpufrom, 1)}
 	ivs := []gbd.IntVar{x, cpu}
 	if plain {
 		return plainTestBenchWrapper, ivs
 	}
 	return superTestBenchWrapper, ivs
 }
+
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -122,9 +120,6 @@ func superTest(x, routines int) (int, int, int) {
 	wg := sync.WaitGroup{}
 	resultChan := make(chan int, 3)
 	wg.Add(routines)
-	/*if x%routines != 0 {
-		wg.Add(1)
-	}*/
 	quit := false
 	z := 1
 	for i := 0; i < routines; i++ {
