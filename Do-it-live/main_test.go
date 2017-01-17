@@ -27,7 +27,6 @@ func benchmark(b *testing.B, which int, inputSize int) {
 		case 4:
 			solve2C(input, listInput)
 		}
-
 	}
 }
 

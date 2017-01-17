@@ -18,7 +18,6 @@ func sbench(b *t.B, x, routines int, quitEnabled bool) {
 	for n := 0; n <= b.N; n++ {
 		a, _, _ := superTest(x, routines, quitEnabled)
 		if a == 0 {
-
 			b.Error("Either goal is unatainable (most likely)")
 		}
 	}
